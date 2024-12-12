@@ -7,9 +7,11 @@ const app = express(); // je créé le serveur
 app.use(express.json()); // permt de lire du JSON
 app.use(cors()); // permet d'ouvir la connexion au serveur
 
+require("dotenv").config(); // j'importe les variables dotenv
 mongoose.connect("mongodb://localhost:27017/vinted-backendv2"); // je me connecte à la base de donnée mongoose
 
 const userRouter = require("./routes/user"); // j'importe ma route UserRouter
+const offerRouter = require("./routes/offer"); // j'importe ma route UserRouter
 
 //////// ROUTES ////////////
 
@@ -23,6 +25,7 @@ app.get("/", (req, res) => {
   }
 });
 app.use(userRouter); // je lance ma route userRouter
+app.use(offerRouter); // je lance ma route userRouter
 
 app.all("*", (req, res) => {
   console.log("Sur la route all");
