@@ -121,7 +121,10 @@ router.get("/offers", async (req, res) => {
     } // 1 pour un tri par prix croissant (moins cher au plus cher).
 
     const offers = await Offer.find(filters) //Recherche les offres correspondant aux filtres passés
-      .select("product_name product_price -_id") //Retourne uniquement les champs product_name et product_price en excluant l’_id.
+      .select(
+        "product_name product_price product_description product_details product_image.secure_url -_id"
+      ) //Retourne uniquement les champs product_name et product_price en excluant l’_id.
+      .populate("owner", "account") // remplace le champs owner (stocké comme objectid) par les infos dans la collection User dans laquelle je recupere uniquement les infos account
       .sort(sortPrice)
       .limit(limit) //Limite le nombre de documents retournés par requête (pagination).
       .skip((pageToSearch - 1) * limit); //	Ignore les résultats des pages précédentes pour retourner les résultats de la page actuelle.
