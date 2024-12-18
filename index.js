@@ -12,6 +12,7 @@ mongoose.connect("mongodb://localhost:27017/vinted-backendv2"); // je me connect
 
 const userRouter = require("./routes/user"); // j'importe ma route UserRouter
 const offerRouter = require("./routes/offer"); // j'importe ma route UserRouter
+const paymentRouter = require("./routes/payment");
 
 //////// ROUTES ////////////
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 });
 app.use(userRouter); // je lance ma route userRouter
 app.use(offerRouter); // je lance ma route userRouter
+app.use(paymentRouter);
 
 app.all("*", (req, res) => {
   console.log("Sur la route all");
