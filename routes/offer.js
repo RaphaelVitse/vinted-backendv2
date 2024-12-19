@@ -190,7 +190,7 @@ router.get("/offers", async (req, res) => {
 
     const offers = await Offer.find(filters) //Recherche les offres correspondant aux filtres passés
       .select(
-        "product_name product_price product_description product_details product_image.secure_url _id"
+        "product_name product_price product_description product_details product_image.secure_url product_pictures _id"
       ) //Retourne uniquement les champs product_name et product_price (pour exclure l'id j'aurais du mettre -_id.
       .populate("owner", "account") // remplace le champs owner (stocké comme objectid) par les infos dans la collection User dans laquelle je recupere uniquement les infos account
       .sort(sortPrice)
